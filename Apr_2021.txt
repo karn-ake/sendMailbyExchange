@@ -1,0 +1,42 @@
+Day28:
+Air Wash: at front entrance
+
+Day16:
+Update rule id:55 PH FW
+
+Day7:
+-Allow SG Staging Server to access SG SLT share folder(10.139.1.150 s:\ftp)
+ - create map drive to 10.139.1.150 s:\ftp
+ 
+ip route add 192.168.89.0/24 via 10.138.1.252 dev ens32
+
+Day2:
+-Christ take regional
+-CSLox, end of May 2021
+-
+
+Day1:
+
+psql -U thops1 -d charts -h 192.168.170.202
+select * from hist1.daily where stkcode='AIMIRT' order by transdate desc limit 10;
+
+reformat OMS SG
+-can format after 5:30 PM SG time.
+
+upgrade NSClient++ on OMS SG Prod
+
+regops account
+new AD on SG Prod
+
+plan to implement new NMDSTFEXDP1B
+1. Up New NMDSTFEXDP1B on Intermission(DPID=3)
+2. Check error on Log and Trace
+3. If no errors, then change DPID=2
+4. comment out IVAP, NMDSTFEXDP, and NewsConvertor in ApplManager.ini on NMDSDP1B
+5. restart NMDSDP1B at 5:15PM.
+6. check only NMDSDP service running on NMDSDP1B
+7. restart NMDSTFEXDP1B at 6PM. to refresh new configure(DPID=2)
+8. restart NMDSTFEXDP1A to switch NMDSTFEXDP1B to be primary
+9. check GF, GF10 pre-open data at 6:45PM.
+10. check GF, GF10 market data at 6:50PM.
+11. if any abnormal happen switch primary to NMDSTFEXDP1A
