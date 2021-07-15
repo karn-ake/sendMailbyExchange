@@ -11,15 +11,27 @@ class sendEmail:
         messages = exchangelib.Message(
             account=account,
             subject='Test send mail to and cc from script',
-            body='Python test script',
+            body=exchangelib.HTMLBody("""<html>
+            <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+            <style type="text/css" style="font-family:Tahoma;font-size:15pt;"></style>
+            </head>
+            <body>
+            <b>Dear All,</b>
+            
+            <p>Here are test sending messages.</p>
+            
+            <i>Best Regards,</i>
+            <p>Thailand Operation Team</p></body></html>
+            """),
             to_recipients=[
                 exchangelib.Mailbox(email_address='karn-ake.r@n2nconnect.com'),
             ],
             #cc_recipients=['thdc@n2nconnect.com'],
         )
-        with open('User Report _2021_06.zip','rb') as attachFile:
+        with open('Trade Value 202106.xlsx','rb') as attachFile:
             binary = attachFile.read()
-        attachments = exchangelib.FileAttachment(name='User Report _2021_06.zip', content=binary)
+        attachments = exchangelib.FileAttachment(name='Trade Value 202106.xlsx', content=binary)
         messages.attach(attachments)
         messages.send()
 
