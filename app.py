@@ -1,11 +1,15 @@
 import exchangelib
+import configparser
 
-USERNAME = 'n2n\\nawapong'
-PASSWORD = 'N2Nconnect123'
-EXCHANGE_SERVER = 'mail.n2nconnect.com'
-SENDER = 'nawapong.a@n2nconnect.com'
-TO_RECIPIENTS = 'karn-ake.r@n2nconnect.com'
-CC_RECIPIENTS = 'thdc@n2nconnect.com'
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+USERNAME = config.get('Email','username')
+PASSWORD = config.get('Email','password')
+EXCHANGE_SERVER = config.get('Email','exchange_server')
+SENDER = config.get('Email','sender')
+TO_RECIPIENTS = config.get('Email','to')
+CC_RECIPIENTS = config.get('Email','cc')
 SUBJECT = 'Test send mail to and cc from script'
 BODY = """<html>
             <head>
@@ -54,5 +58,6 @@ class sendEmail:
         messages.attach(attachments)
         messages.send()
 
-daily_report = sendEmail(USERNAME, PASSWORD, EXCHANGE_SERVER, SENDER, TO_RECIPIENTS, CC_RECIPIENTS, SUBJECT, BODY, ATTACHMENT)
-daily_report.connectedExchange()
+if __name__ == "__main__":
+    daily_report = sendEmail(USERNAME, PASSWORD, EXCHANGE_SERVER, SENDER, TO_RECIPIENTS, CC_RECIPIENTS, SUBJECT, BODY, ATTACHMENT)
+    daily_report.connectedExchange()
